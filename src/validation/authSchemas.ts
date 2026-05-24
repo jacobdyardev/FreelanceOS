@@ -1,12 +1,11 @@
 import { z } from "zod";
 
-// Login form validation
+// Shared auth form schemas keep input rules aligned across UI and API boundaries.
 export const loginSchema = z.object({
   email: z.email(),
   password: z.string().min(8),
 });
 
-// Registration form validation
 export const registerSchema = z
   .object({
     name: z.string().min(2),
@@ -14,6 +13,7 @@ export const registerSchema = z
     password: z.string().min(8),
     confirmPassword: z.string(),
   })
+  // confirmPassword exists only for client/API validation and should never be persisted.
   .refine(
     (data) => data.password === data.confirmPassword,
     {

@@ -1,3 +1,4 @@
+// Central NextAuth configuration shared by the auth route and future server helpers.
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from "next-auth";
 
@@ -22,6 +23,7 @@ export const authConfig: NextAuthConfig = {
   },
 
   session: {
+    // Use stateless JWT sessions until server-side session storage is needed.
     strategy: "jwt",
   },
 };

@@ -1,4 +1,4 @@
-// Shared Prisma client instance for the application.
+// Shared Prisma client instance for application-wide database access.
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -18,5 +18,6 @@ export const prisma =
   });
 
 if (process.env.NODE_ENV !== "production") {
+  // Reuse the client during local hot reloads to avoid exhausting database connections.
   globalForPrisma.prisma = prisma;
 }
